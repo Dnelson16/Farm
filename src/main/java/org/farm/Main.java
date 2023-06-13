@@ -12,13 +12,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Create an instance of EmployeeDao
+
         IEmployeeDao employeeDao = new EmployeeDaoJDBC();
 
-        // Create an instance of EmployeeService and pass the EmployeeDao
+
         EmployeeService employeeService = new EmployeeService((EmployeeDaoJDBC) employeeDao);
 
-        // Retrieve all employees
+
         List<Employee> employeeList = employeeService.getAll();
         System.out.println("All Employees:");
         for (Employee employee : employeeList) {
@@ -27,7 +27,7 @@ public class Main {
                     " : " + employee.getFarmerId());
         }
 
-        // Get a specific employee by ID
+
         int employeeId = 2;
         Employee specificEmployee = employeeService.getById(employeeId);
         if (specificEmployee != null) {
@@ -39,15 +39,15 @@ public class Main {
             System.out.println("\nEmployee with ID " + employeeId + " not found.");
         }
 
-        // Update an employee
+
         Employee updatedEmployee = new Employee(3, 2, "Jane Smith", "Supervisor", 6000.0, 2);
         employeeService.update(updatedEmployee);
 
-        // Delete an employee
+
         int employeeIdToDelete = 4;
         employeeService.delete(employeeIdToDelete);
 
-        // Shutdown the connection pool
+
         ConnectionPool.shutdown();
 
         BreedingService breedingService = new BreedingService();
