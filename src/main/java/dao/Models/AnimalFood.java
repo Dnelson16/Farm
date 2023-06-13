@@ -1,5 +1,6 @@
 package dao.Models;
 
+
 public class AnimalFood {
     private String name;
     private double price;

@@ -11,13 +11,7 @@ public class FoodSelling {
     }
 
     public void sellFood(AnimalFood food, int quantity) {
-        // Add selling logic here
-        // Check if the requested quantity is available
-        // Update the quantity of the food item after the sale
-        // Calculate and handle the transaction
     }
-
-    // Other methods for managing food items
 
     public void addFoodItem(AnimalFood food) {
         foodItems.add(food);

@@ -16,7 +16,7 @@ public class Menu {
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -107,10 +107,10 @@ public class Menu {
                     int updatedFarmerId = scanner.nextInt();
                     scanner.nextLine(); // Consume newline character
 
-                    // Create an updated Employee object with the gathered input
+
                     Employee updatedEmployee = new Employee(employeeIdToUpdate, updatedFarmId, updatedName, updatedPosition, updatedSalary, updatedFarmerId);
 
-                    // Use the EmployeeService to update the employee in the database
+
                     boolean updateResult = updatedEmployee.update(updatedEmployee);
                     if (updateResult) {
                         System.out.println("Employee updated successfully.");

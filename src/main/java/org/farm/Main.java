@@ -27,7 +27,6 @@ public class Main {
                     " : " + employee.getFarmerId());
         }
 
-
         int employeeId = 2;
         Employee specificEmployee = employeeService.getById(employeeId);
         if (specificEmployee != null) {

@@ -12,12 +12,10 @@ public class BreedingService {
     }
 
     public void breedAnimals(Animal parent1, Animal parent2) {
-        // Add breeding logic here
-        // Generate offspring based on parent attributes
-        // Add the offspring to the list of animals
+
     }
 
-    // Other methods for managing animals
+
 
     public void addAnimal(Animal animal) {
         animals.add(animal);
