@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<farm>
+    <farmstead>
+        <farmId>1</farmId>
+        <name>My Farm</name>
+        <location>City</location>
+    </farmstead>
+    <employees>
+        <employee>
+            <employeeId>1</employeeId>
+            <farmId>1</farmId>
+            <name>John Doe</name>
+            <position>Manager</position>
+            <salary>5000.0</salary>
+            <farmerId>1</farmerId>
+        </employee>
+        <employee>
+            <employeeId>2</employeeId>
+            <farmId>1</farmId>
+            <name>Jane Smith</name>
+            <position>Supervisor</position>
+            <salary>4000.0</salary>
+            <farmerId>1</farmerId>
+        </employee>
+    </employees>
+    <crops>
+        <crop>
+            <cropId>1</cropId>
+            <name>Corn</name>
+            <quantity>100</quantity>
+            <farmId>1</farmId>
+        </crop>
+        <crop>
+            <cropId>2</cropId>
+            <name>Wheat</name>
+            <quantity>200</quantity>
+            <farmId>1</farmId>
+        </crop>
+    </crops>
+</farm>

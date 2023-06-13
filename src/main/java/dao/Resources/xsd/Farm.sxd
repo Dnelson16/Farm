@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="farm">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="farmstead" type="farmsteadType"/>
+                <xs:element name="employees" type="employeesType"/>
+                <xs:element name="crops" type="cropsType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="farmsteadType">
+        <xs:sequence>
+            <xs:element name="farmId" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="location" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="employeesType">
+        <xs:sequence>
+            <xs:element name="employee" type="employeeType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="employeeType">
+        <xs:sequence>
+            <xs:element name="employeeId" type="xs:int"/>
+            <xs:element name="farmId" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="position" type="xs:string"/>
+            <xs:element name="salary" type="xs:double"/>
+            <xs:element name="farmerId" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cropsType">
+        <xs:sequence>
+            <xs:element name="crop" type="cropType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cropType">
+        <xs:sequence>
+            <xs:element name="cropId" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="quantity" type="xs:int"/>
+            <xs:element name="farmId" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
