@@ -40,7 +40,7 @@ public class JSONExample {
             // Create ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
 
-            // Write objects to JSON file
+
             objectMapper.writeValue(new File("farmstead.json"), farm);
 
             LOGGER.info("JSON file created successfully!");

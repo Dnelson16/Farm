@@ -61,7 +61,7 @@ public class ConnectionPool {
         }
     }
 
-    public void shutdown() {
+    public static void shutdown() {
         try {
             dataSource.close();
         } catch (SQLException e) {

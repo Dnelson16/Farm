@@ -17,7 +17,7 @@ public class JSONParser {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
 
-            // Read JSON from file
+
             File jsonFile = new File("/Users/dylannelson16/IdeaProjects/Farm/src/main/java/dao/Resources/JSON/farmstead.json");
             Farmstead farmstead = objectMapper.readValue(jsonFile, Farmstead.class);
 
