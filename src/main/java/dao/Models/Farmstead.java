@@ -32,6 +32,8 @@ public class Farmstead {
     @XmlElement
     @XmlSchemaType(name = "date")
     private Date dateCreated;
+    private String location;
+
 
     public int getFarmId() {
         return farmId;
@@ -91,6 +93,20 @@ public class Farmstead {
 
     public List<Animal> getAnimals() {
         return null;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setAnimals(List<Animal> animal) {
+    }
+
+    public void setFoods(List<AnimalFood> food) {
     }
 }
 //    private int farmId;

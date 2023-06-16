@@ -29,6 +29,10 @@ public class Animal extends Farmstead {
         super();
     }
 
+    public Animal() {
+
+    }
+
     public int getAnimalId() {
         return animalId;
     }

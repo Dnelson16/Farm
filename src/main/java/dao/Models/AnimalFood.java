@@ -1,7 +1,7 @@
 package dao.Models;
 
 
-public class AnimalFood {
+public class AnimalFood extends Farmstead {
     private String name;
     private double price;
     private int quantity;
@@ -10,6 +10,10 @@ public class AnimalFood {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public AnimalFood() {
+
     }
 
     public void setName(String name) {

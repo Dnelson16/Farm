@@ -4,6 +4,7 @@ import dao.Models.Employee;
 import dao.DAOJDBC.EmployeeDaoJDBC;
 
 import java.util.List;
+import static org.farm.Main.LOGGER;
 
 public class EmployeeService {
 
@@ -15,7 +16,7 @@ public class EmployeeService {
 
         public Employee create(Employee employee) {
             employeeDao.create(employee);
-            System.out.println("Employee created successfully");
+            LOGGER.info("Employee created successfully");
             return employee;
         }
 

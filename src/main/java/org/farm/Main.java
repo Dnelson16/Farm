@@ -1,5 +1,6 @@
 package org.farm;
 
+import java.util.logging.Logger;
 import dao.Models.*;
 import dao.ConnectionPool.ConnectionPool;
 import dao.DAOJDBC.EmployeeDaoJDBC;
@@ -9,6 +10,9 @@ import dao.Service.EmployeeService;
 import java.util.List;
 
 public class Main {
+
+
+    public static final Logger LOGGER = Logger.getLogger(Main.class.getName()); ;
 
     public static void main(String[] args) {
 
@@ -20,9 +24,9 @@ public class Main {
 
 
         List<Employee> employeeList = employeeService.getAll();
-        System.out.println("All Employees:");
+        LOGGER.info("All Employees:");
         for (Employee employee : employeeList) {
-            System.out.println(employee.getEmployeeId() + " : " + employee.getFarmId() + " : " +
+            LOGGER.info(employee.getEmployeeId() + " : " + employee.getFarmId() + " : " +
                     employee.getName() + " : " + employee.getPosition() + " : " + employee.getSalary() +
                     " : " + employee.getFarmerId());
         }
@@ -30,12 +34,12 @@ public class Main {
         int employeeId = 2;
         Employee specificEmployee = employeeService.getById(employeeId);
         if (specificEmployee != null) {
-            System.out.println("\nEmployee with ID " + employeeId + ":");
-            System.out.println(specificEmployee.getEmployeeId() + " : " + specificEmployee.getFarmId() + " : " +
+            LOGGER.info("\nEmployee with ID " + employeeId + ":");
+            LOGGER.info(specificEmployee.getEmployeeId() + " : " + specificEmployee.getFarmId() + " : " +
                     specificEmployee.getName() + " : " + specificEmployee.getPosition() + " : " +
                     specificEmployee.getSalary() + " : " + specificEmployee.getFarmerId());
         } else {
-            System.out.println("\nEmployee with ID " + employeeId + " not found.");
+            LOGGER.info("\nEmployee with ID " + employeeId + " not found.");
         }
 
 
@@ -61,7 +65,7 @@ public class Main {
 
         List<Animal> allAnimals = breedingService.getAllAnimals();
         for (Animal animal : allAnimals) {
-            System.out.println("Species: " + animal.getSpecies() + ", Age: " + animal.getAge() + ", Gender: " + animal.getGender());
+            LOGGER.info("Species: " + animal.getSpecies() + ", Age: " + animal.getAge() + ", Gender: " + animal.getGender());
         }
 
         FoodSelling sellingSystem = new FoodSelling();
@@ -76,10 +80,10 @@ public class Main {
 
         if (allFoodItems != null) {
             for (AnimalFood animalFood : allFoodItems) {
-                System.out.println("Food: " + animalFood.getName() + ", Price: $" + animalFood.getPrice());
+                LOGGER.info("Food: " + animalFood.getName() + ", Price: $" + animalFood.getPrice());
             }
         } else {
-            System.out.println("No food items found.");
+            LOGGER.info("No food items found.");
         }
 
 
