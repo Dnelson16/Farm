@@ -14,7 +14,7 @@ import static org.farm.Main.LOGGER;
 public class JSONExample {
     public static void main(String[] args) {
         try {
-            // Create objects
+
             Animal animal = new Animal();
             animal.setFarmId(1);
             animal.setName("Animal Farm");

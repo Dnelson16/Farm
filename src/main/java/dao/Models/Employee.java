@@ -10,9 +10,9 @@ public class Employee {
     private Double salary;
     private int farmerId;
 
-    public Employee(int employeeId, int farnId, String name, String position, Double salary, int farmerId) {
+    public Employee(int employeeId, int farmId, String name, String position, Double salary, int farmerId) {
         this.employeeId = employeeId;
-        this.farmId = farnId;
+        this.farmId = farmId;
         this.name = name;
         this.position = position;
         this.salary = salary;

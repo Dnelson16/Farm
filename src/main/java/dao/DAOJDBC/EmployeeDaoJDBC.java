@@ -58,6 +58,31 @@ public class EmployeeDaoJDBC implements IEmployeeDao {
         return employee;
     }
 
+    @Override
+    public List<Employee> getAllEmployees() {
+        return null;
+    }
+
+    @Override
+    public Employee getEmployeeById(int employeeId) {
+        return null;
+    }
+
+    @Override
+    public void insertEmployee(Employee employee) {
+
+    }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+
+    }
+
+    @Override
+    public void deleteEmployee(int employeeId) {
+
+    }
+
     public List<Employee> getAll() {
         List<Employee> employeeList = new ArrayList<>();
         String query = "SELECT * FROM employee";

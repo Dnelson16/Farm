@@ -2,9 +2,12 @@ package dao.ConnectionPool;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -12,7 +15,7 @@ import static org.farm.Main.LOGGER;
 
 public class ConnectionPool {
 
-    private static final String PROPERTY_FILE = "database.properties";
+    private static final String PROPERTY_FILE = "src/main/java/dao/database.properties";
     private static final BasicDataSource dataSource = new BasicDataSource();
     private static ConnectionPool instance;
 
@@ -29,9 +32,11 @@ public class ConnectionPool {
     }
 
     private void loadDatabaseProperties() {
+        DriverManager.setLogWriter(new PrintWriter(System.out));
+
         Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(PROPERTY_FILE)) {
-            properties.load(fis);
+        try (InputStream is = ConnectionPool.class.getClassLoader().getResourceAsStream("database.properties")) {
+            properties.load(is);
             dataSource.setUrl(properties.getProperty("db.url"));
             dataSource.setUsername(properties.getProperty("db.username"));
             dataSource.setPassword(properties.getProperty("db.password"));
@@ -46,7 +51,7 @@ public class ConnectionPool {
         // You can set additional properties of the data source here
     }
 
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 

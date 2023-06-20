@@ -1,23 +1,17 @@
 package dao.Interfaces;
 
 import dao.Models.Employee;
-
 import java.util.List;
 
-
-public interface IEmployeeDao extends IDAO<Employee> {
-    @Override
-    Employee create(Employee employee);
-
-    @Override
-    Employee getById(int id);
-
-    @Override
+public interface IEmployeeDao {
     List<Employee> getAll();
 
-    @Override
-    Employee update(Employee employee);
+    Employee getById(int employeeId);
 
-    @Override
-    int delete(int id);
+    List<Employee> getAllEmployees();
+    Employee getEmployeeById(int employeeId);
+    void insertEmployee(Employee employee);
+    void updateEmployee(Employee employee);
+    void deleteEmployee(int employeeId);
 }
+
