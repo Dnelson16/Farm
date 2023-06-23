@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.Mappers.EmployeeMapper">
+
+    <select id="getAllEmployees" resultType="dao.Models.Employee">
+        SELECT * FROM employees
+    </select>
+
+    <select id="getEmployeeById" parameterType="int" resultType="dao.Models.Employee">
+        SELECT * FROM employees WHERE employee_id = #{employeeId}
+    </select>
+
+    <insert id="insertEmployee" parameterType="dao.Models.Employee">
+        INSERT INTO employees (employee_id, farm_id, name, position, salary, farmer_id)
+        VALUES (#{employeeId}, #{farmId}, #{name}, #{position}, #{salary}, #{farmerId})
+    </insert>
+
+    <update id="updateEmployee" parameterType="dao.Models.Employee">
+        UPDATE employees SET farm_id = #{farmId}, name = #{name}, position = #{position},
+        salary = #{salary}, farmer_id = #{farmerId} WHERE employee_id = #{employeeId}
+    </update>
+
+    <delete id="deleteEmployee" parameterType="int">
+        DELETE FROM employees WHERE employee_id = #{employeeId}
+    </delete>
+
+</mapper>

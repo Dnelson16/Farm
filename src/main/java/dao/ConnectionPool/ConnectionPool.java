@@ -31,6 +31,9 @@ public class ConnectionPool {
         return instance;
     }
 
+    public static void initialize() {
+    }
+
     private void loadDatabaseProperties() {
         DriverManager.setLogWriter(new PrintWriter(System.out));
 

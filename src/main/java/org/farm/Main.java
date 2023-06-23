@@ -1,39 +1,39 @@
 package org.farm;
 
-import java.io.IOException;
-import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-
+import dao.DAOJDBC.AnimalDaoJDBC;
+import dao.DAOJDBC.EmployeeDaoJDBC;
+import dao.Interfaces.IAnimalDao;
+import dao.Interfaces.IEmployeeDao;
 import dao.Models.Animal;
 import dao.Models.AnimalFood;
 import dao.Models.Employee;
-
 import dao.ConnectionPool.ConnectionPool;
-import dao.Interfaces.IEmployeeDao;
 import dao.Models.FoodSelling;
-import dao.MyBatis.EmployeeDaoMyBatisImpl;
 import dao.Service.BreedingService;
 import dao.Service.EmployeeService;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 
 public class Main {
 
     public static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        // Create the SqlSessionFactory
-        SqlSessionFactory sqlSessionFactory = createSqlSessionFactory();
+        ConnectionPool.initialize();
 
-        // Create the EmployeeDao and EmployeeService instances
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            IEmployeeDao employeeDao = new EmployeeDaoMyBatisImpl(sqlSession);
+        String jdbcUrl = "db.url";
+        String username = "db.username";
+        String password = "db.password";
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            LOGGER.info("Connected to the database!");
+            IEmployeeDao employeeDao = new EmployeeDaoJDBC();
             EmployeeService employeeService = new EmployeeService(employeeDao);
-
 
             List<Employee> employeeList = employeeService.getAllEmployees();
             LOGGER.info("All Employees:");
@@ -60,11 +60,13 @@ public class Main {
             int employeeIdToDelete = 4;
             employeeService.deleteEmployee(employeeIdToDelete);
 
-            ConnectionPool.shutdown();
+            // Initialize the AnimalDao
+            IAnimalDao animalDao = new AnimalDaoJDBC();
+            // Initialize the BreedingService with the AnimalDao
+            BreedingService breedingService = new BreedingService(animalDao);
 
             Animal parent1 = new Animal(1, 1, "Cow", "Belgian", 3, "Male");
-            Animal parent2 = new Animal(1, 2, "Dog", "Shephard", 4, "Female");
-            BreedingService breedingService = null;
+            Animal parent2 = new Animal(1, 2, "Dog", "Shepherd", 4, "Female");
             breedingService.addAnimal(parent1);
             breedingService.addAnimal(parent2);
 
@@ -96,20 +98,12 @@ public class Main {
             // Sell food
             sellingSystem.sellFood(item1, 2);
             sellingSystem.sellFood(item2, 3);
-        }
-    }
 
-    private static SqlSessionFactory createSqlSessionFactory() {
-        SqlSessionFactory sqlSessionFactory = null;
-        String resource = "mybatis-config.xml";
-        try (Reader reader = Resources.getResourceAsReader(resource)) {
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        } catch (IOException e) {
-            LOGGER.severe("Error creating SqlSessionFactory: " + e.getMessage());
+            ConnectionPool.shutdown(); // Shutdown the connection pool
+        } catch (SQLException e) {
+            LOGGER.severe("Failed to connect to the database.");
+            e.printStackTrace();
         }
-        return sqlSessionFactory;
     }
 }
-
-
 
