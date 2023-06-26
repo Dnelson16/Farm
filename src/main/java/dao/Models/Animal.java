@@ -1,8 +1,6 @@
 package dao.Models;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Animal extends Farmstead {
@@ -29,6 +27,10 @@ public class Animal extends Farmstead {
 
     public Animal(int animalId, int farmId, String name, String species, int age, String gender) {
         super();
+    }
+
+    public Animal() {
+
     }
 
     public int getAnimalId() {

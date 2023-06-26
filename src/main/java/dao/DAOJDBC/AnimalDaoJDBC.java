@@ -111,6 +111,21 @@ public class AnimalDaoJDBC implements IAnimalDao {
         }
         return id;
     }
+
+    @Override
+    public void insertAnimal(Animal animal) {
+
+    }
+
+    @Override
+    public void updateAnimal(Animal animal) {
+
+    }
+
+    @Override
+    public void deleteAnimal(int animalId) {
+
+    }
 }
 
 

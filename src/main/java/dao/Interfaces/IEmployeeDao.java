@@ -1,23 +1,29 @@
 package dao.Interfaces;
-
 import dao.Models.Employee;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+@Mapper
+public interface IEmployeeDao {
 
-public interface IEmployeeDao extends IDAO<Employee> {
-    @Override
-    Employee create(Employee employee);
+    @Select("SELECT * FROM employees")
+    List<Employee> getAllEmployees();
 
-    @Override
-    Employee getById(int id);
+    @Select("SELECT * FROM employees WHERE employeeId = #{employeeId}")
+    Employee getEmployeeById(int employeeId);
 
-    @Override
-    List<Employee> getAll();
+    @Insert("INSERT INTO employees (employeeId, farmId, name, position, salary, farmerId) " +
+            "VALUES (#{employee.employeeId}, #{employee.farmId}, #{employee.name}, " +
+            "#{employee.position}, #{employee.salary}, #{employee.farmerId})")
+    void insertEmployee(@Param("employee") Employee employee);
 
-    @Override
-    Employee update(Employee employee);
+    @Update("UPDATE employees SET farmId = #{employee.farmId}, name = #{employee.name}, " +
+            "position = #{employee.position}, salary = #{employee.salary}, farmerId = #{employee.farmerId} " +
+            "WHERE employeeId = #{employee.employeeId}")
+    void updateEmployee(@Param("employee") Employee employee);
 
-    @Override
-    int delete(int id);
+    @Delete("DELETE FROM employees WHERE employeeId = #{employeeId}")
+    void deleteEmployee(int employeeId);
+
 }

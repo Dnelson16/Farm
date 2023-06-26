@@ -2,6 +2,8 @@ package dao.Models;
 
 import java.util.Scanner;
 
+import static org.farm.Main.LOGGER;
+
 public class Menu {
     private static Scanner scanner = new Scanner(System.in);
 
@@ -9,14 +11,14 @@ public class Menu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("Menu:");
-            System.out.println("1. Database Operations");
-            System.out.println("2. XML Parsing");
-            System.out.println("3. Exit");
+            LOGGER.info("Menu:");
+            LOGGER.info("1. Database Operations");
+            LOGGER.info("2. XML Parsing");
+            LOGGER.info("3. Exit");
 
-            System.out.print("Enter your choice: ");
+            LOGGER.info("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -29,7 +31,7 @@ public class Menu {
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    LOGGER.info("Invalid choice. Please try again.");
             }
 
             System.out.println();
@@ -40,39 +42,39 @@ public class Menu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("Database Operations:");
-            System.out.println("1. Insert data");
-            System.out.println("2. Update data");
-            System.out.println("3. Delete data");
-            System.out.println("4. Back to main menu");
+            LOGGER.info("Database Operations:");
+            LOGGER.info("1. Insert data");
+            LOGGER.info("2. Update data");
+            LOGGER.info("3. Delete data");
+            LOGGER.info("4. Back to main menu");
 
-            System.out.print("Enter your choice: ");
+            LOGGER.info("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    System.out.println("Performing database insertion...");
+                    LOGGER.info("Performing database insertion...");
 
-                    System.out.print("Enter employee ID: ");
+                    LOGGER.info("Enter employee ID: ");
                     int employeeId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Enter farm ID: ");
+                    LOGGER.info("Enter farm ID: ");
                     int farmId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Enter employee name: ");
+                    LOGGER.info("Enter employee name: ");
                     String name = scanner.nextLine();
 
-                    System.out.print("Enter position: ");
+                    LOGGER.info("Enter position: ");
                     String position = scanner.nextLine();
 
-                    System.out.print("Enter salary: ");
+                    LOGGER.info("Enter salary: ");
                     double salary = scanner.nextDouble();
                     scanner.nextLine();
 
-                    System.out.print("Enter farmer ID: ");
+                    LOGGER.info("Enter farmer ID: ");
                     int farmerId = scanner.nextInt();
                     scanner.nextLine();
 
@@ -80,54 +82,54 @@ public class Menu {
 
                     newEmployee.create(newEmployee);
 
-                    System.out.println("Employee inserted successfully.");
+                    LOGGER.info("Employee inserted successfully.");
                     break;
                 case 2:
-                    System.out.println("Performing database update...");
+                    LOGGER.info("Performing database update...");
 
-                    System.out.print("Enter the employee ID to update: ");
+                    LOGGER.info("Enter the employee ID to update: ");
                     int employeeIdToUpdate = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Enter updated farm ID: ");
+                    LOGGER.info("Enter updated farm ID: ");
                     int updatedFarmId = scanner.nextInt();
                     scanner.nextLine(); // Consume newline character
 
-                    System.out.print("Enter updated employee name: ");
+                    LOGGER.info("Enter updated employee name: ");
                     String updatedName = scanner.nextLine();
 
-                    System.out.print("Enter updated position: ");
+                    LOGGER.info("Enter updated position: ");
                     String updatedPosition = scanner.nextLine();
 
-                    System.out.print("Enter updated salary: ");
+                    LOGGER.info("Enter updated salary: ");
                     double updatedSalary = scanner.nextDouble();
                     scanner.nextLine(); // Consume newline character
 
-                    System.out.print("Enter updated farmer ID: ");
+                    LOGGER.info("Enter updated farmer ID: ");
                     int updatedFarmerId = scanner.nextInt();
                     scanner.nextLine(); // Consume newline character
 
-                    // Create an updated Employee object with the gathered input
+
                     Employee updatedEmployee = new Employee(employeeIdToUpdate, updatedFarmId, updatedName, updatedPosition, updatedSalary, updatedFarmerId);
 
-                    // Use the EmployeeService to update the employee in the database
+
                     boolean updateResult = updatedEmployee.update(updatedEmployee);
                     if (updateResult) {
-                        System.out.println("Employee updated successfully.");
+                        LOGGER.info("Employee updated successfully.");
                     } else {
-                        System.out.println("Error updating employee.");
+                        LOGGER.info("Error updating employee.");
                     }
                     break;
 
                 case 3:
                     // Implement logic to delete data from the database
-                    System.out.println("Performing database deletion...");
+                    LOGGER.info("Performing database deletion...");
                     break;
                 case 4:
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    LOGGER.info("Invalid choice. Please try again.");
             }
 
             System.out.println();
@@ -138,34 +140,34 @@ public class Menu {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("XML Parsing:");
-            System.out.println("1. DOM Parser");
-            System.out.println("2. SAX Parser");
-            System.out.println("3. StAX Parser");
-            System.out.println("4. Back to main menu");
+            LOGGER.info("XML Parsing:");
+            LOGGER.info("1. DOM Parser");
+            LOGGER.info("2. SAX Parser");
+            LOGGER.info("3. StAX Parser");
+            LOGGER.info("4. Back to main menu");
 
-            System.out.print("Enter your choice: ");
+            LOGGER.info("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
 
             switch (choice) {
                 case 1:
                     // Implement logic to parse XML using DOM parser
-                    System.out.println("Performing XML parsing with DOM parser...");
+                    LOGGER.info("Performing XML parsing with DOM parser...");
                     break;
                 case 2:
                     // Implement logic to parse XML using SAX parser
-                    System.out.println("Performing XML parsing with SAX parser...");
+                    LOGGER.info("Performing XML parsing with SAX parser...");
                     break;
                 case 3:
                     // Implement logic to parse XML using StAX parser
-                    System.out.println("Performing XML parsing with StAX parser...");
+                    LOGGER.info("Performing XML parsing with StAX parser...");
                     break;
                 case 4:
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    LOGGER.info("Invalid choice. Please try again.");
             }
 
             System.out.println();

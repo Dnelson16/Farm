@@ -1,0 +1,71 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "farmId": 1,
+      "name": "John Doe",
+      "position": "Manager",
+      "salary": 5000.0,
+      "farmerId": 1
+    },
+    {
+      "id": 2,
+      "farmId": 1,
+      "name": "Jane Smith",
+      "position": "Supervisor",
+      "salary": 4000.0,
+      "farmerId": 1
+    },
+    {
+      "id": 3,
+      "farmId": 2,
+      "name": "Michael Johnson",
+      "position": "Worker",
+      "salary": 3000.0,
+      "farmerId": 2
+    }
+  ],
+  "animals": [
+    {
+      "id": 1,
+      "farmId": 1,
+      "species": "Cow",
+      "breed": "Belgian",
+      "age": 3,
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "farmId": 1,
+      "species": "Dog",
+      "breed": "Shepherd",
+      "age": 4,
+      "gender": "Female"
+    },
+    {
+      "id": 3,
+      "farmId": 2,
+      "species": "Cat",
+      "breed": "Persian",
+      "age": 2,
+      "gender": "Female"
+    }
+  ],
+  "foodItems": [
+    {
+      "name": "Carrots",
+      "price": 1.99,
+      "quantity": 5
+    },
+    {
+      "name": "Apples",
+      "price": 2.49,
+      "quantity": 3
+    },
+    {
+      "name": "Hay",
+      "price": 3.99,
+      "quantity": 10
+    }
+  ]
+}

@@ -19,10 +19,10 @@ public class SAXParserExample {
     public static void main(String[] args) {
         try {
             // Path to the XML file to parse
-            String xmlFilePath = "/Users/dylannelson16/IdeaProjects/Farm/src/main/java/dao/Resources/xml/Farm.xml";
+            String xmlFilePath = "/Users/dylannelson16/IdeaProjects/Farm/src/main/java/dao/Resources/Farm.xml";
 
             // Path to the XSD schema file
-            String xsdFilePath = "/Users/dylannelson16/IdeaProjects/Farm/src/main/java/dao/Resources/xsd/Farm.sxd";
+            String xsdFilePath = "/Users/dylannelson16/IdeaProjects/Farm/src/main/java/dao/Resources/Farm.xsd";
 
             // Validate the XML file against the XSD schema
             boolean isValid = validateXML(xmlFilePath, xsdFilePath);

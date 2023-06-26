@@ -1,5 +1,6 @@
 package dao.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.xml.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
@@ -8,12 +9,14 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Farmstead {
     @XmlElement
+    @JsonProperty("farmId")
     private int farmId;
 
     @XmlElement
     private int farmerId;
 
     @XmlElement
+    @JsonProperty("farmName")
     private String Name;
 
     @XmlElement
@@ -32,6 +35,8 @@ public class Farmstead {
     @XmlElement
     @XmlSchemaType(name = "date")
     private Date dateCreated;
+    private String location;
+
 
     public int getFarmId() {
         return farmId;
@@ -91,6 +96,20 @@ public class Farmstead {
 
     public List<Animal> getAnimals() {
         return null;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setAnimals(List<Animal> animal) {
+    }
+
+    public void setFoods(List<AnimalFood> food) {
     }
 }
 //    private int farmId;
