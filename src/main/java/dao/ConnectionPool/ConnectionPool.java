@@ -1,80 +1,77 @@
 package dao.ConnectionPool;
 
-import org.apache.commons.dbcp2.BasicDataSource;
-
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
-import static org.farm.Main.LOGGER;
 
 public class ConnectionPool {
 
-    private static final String PROPERTY_FILE = "src/main/java/dao/database.properties";
-    private static final BasicDataSource dataSource = new BasicDataSource();
-    private static ConnectionPool instance;
+    private static final String PROPERTIES_FILE = "db.properties";
+    private static final String PROPERTY_URL = "db.url";
+    private static final String PROPERTY_USERNAME = "db.username";
+    private static final String PROPERTY_PASSWORD = "db.password";
 
-    private ConnectionPool() {
-        loadDatabaseProperties();
-        configureDataSource();
-    }
-
-    public static ConnectionPool getInstance() {
-        if (instance == null) {
-            instance = new ConnectionPool();
-        }
-        return instance;
-    }
+    private static boolean initialized = false;
+    private static List<Connection> connectionPool = new ArrayList<>();
+    private static int initialConnections = 5;
 
     public static void initialize() {
-    }
+        if (!initialized) {
+            try (InputStream inputStream = ConnectionPool.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+                Properties properties = new Properties();
+                properties.load(inputStream);
 
-    private void loadDatabaseProperties() {
-        DriverManager.setLogWriter(new PrintWriter(System.out));
+                String url = properties.getProperty(PROPERTY_URL);
+                String username = properties.getProperty(PROPERTY_USERNAME);
+                String password = properties.getProperty(PROPERTY_PASSWORD);
 
-        Properties properties = new Properties();
-        try (InputStream is = ConnectionPool.class.getClassLoader().getResourceAsStream("database.properties")) {
-            properties.load(is);
-            dataSource.setUrl(properties.getProperty("db.url"));
-            dataSource.setUsername(properties.getProperty("db.username"));
-            dataSource.setPassword(properties.getProperty("db.password"));
-        } catch (IOException e) {
-            LOGGER.info("Error loading database properties: " + e.getMessage());
-        }
-    }
 
-    private void configureDataSource() {
-        dataSource.setInitialSize(5); // Set the initial number of connections
-        dataSource.setMaxTotal(10); // Set the maximum number of connections
-        // You can set additional properties of the data source here
-    }
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 
-    public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
+                for (int i = 0; i < initialConnections; i++) {
+                    Connection connection = DriverManager.getConnection(url, username, password);
+                    connectionPool.add(connection);
+                }
 
-    public void closeConnection(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.info("Error closing database connection");
-                e.printStackTrace();
+                initialized = true;
+            } catch (IOException | SQLException e) {
+                throw new RuntimeException("Failed to initialize connection pool", e);
             }
         }
     }
 
-    public static void shutdown() {
-        try {
-            dataSource.close();
-        } catch (SQLException e) {
-            LOGGER.info("Error shutting down connection pool");
-            e.printStackTrace();
+    public static Connection getConnection() throws SQLException {
+        if (!initialized) {
+            throw new IllegalStateException("Connection pool has not been initialized");
         }
+
+        Connection conn = null;
+
+        synchronized (connectionPool) {
+            if (!connectionPool.isEmpty()) {
+                conn = connectionPool.remove(0);
+            }
+        }
+
+        if (conn == null) {
+            throw new SQLException("Failed to get a connection from the pool");
+        }
+
+        return conn;
     }
+
+    public static void shutdown() throws SQLException {
+        for (Connection conn : connectionPool) {
+            conn.close();
+        }
+
+        connectionPool.clear();
+    }
+
 }
+
