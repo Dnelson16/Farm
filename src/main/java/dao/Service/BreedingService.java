@@ -1,6 +1,5 @@
 package dao.Service;
 
-
 import dao.Interfaces.IAnimalDao;
 import dao.Models.Animal;
 
@@ -25,30 +24,40 @@ public class BreedingService {
         }
     }
 
-
-    public BreedingService() {
-
-    }
-
     public List<Animal> getAll() {
-        return animalDao.getAll();
+        if (animalDao != null) {
+            return animalDao.getAll();
+        } else {
+            throw new IllegalStateException("AnimalDao is not initialized.");
+        }
     }
 
     public Animal getById(int animalId) {
-        return animalDao.getById(animalId);
+        if (animalDao != null) {
+            return animalDao.getById(animalId);
+        } else {
+            throw new IllegalStateException("AnimalDao is not initialized.");
+        }
     }
 
-
-
     public void updateAnimal(Animal animal) {
-        animalDao.updateAnimal(animal);
+        if (animalDao != null) {
+            animalDao.updateAnimal(animal);
+        } else {
+            throw new IllegalStateException("AnimalDao is not initialized.");
+        }
     }
 
     public void deleteAnimal(int animalId) {
-        animalDao.deleteAnimal(animalId);
+        if (animalDao != null) {
+            animalDao.deleteAnimal(animalId);
+        } else {
+            throw new IllegalStateException("AnimalDao is not initialized.");
+        }
     }
 
     public void breedAnimals(Animal parent1, Animal parent2) {
+        // Implementation of breedAnimals method
     }
 
     public List<Animal> getAllAnimals() {

@@ -1,13 +1,14 @@
 package dao.Service;
 
 import dao.Interfaces.IEmployeeDao;
+import dao.Interfaces.IEmployeeService;
 import dao.Models.Employee;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService {
 
     private IEmployeeDao employeeDao;
 
@@ -21,7 +22,7 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() {
         List<Employee> employeeList = employeeDao.getAllEmployees();
 
-        // Check if the employeeList is null and return an empty list instead
+
         if (employeeList == null) {
             return new ArrayList<>();
         }

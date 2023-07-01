@@ -1,7 +1,6 @@
 package org.farm;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -26,11 +25,7 @@ public class Main {
     public static void main(String[] args) {
         ConnectionPool.initialize();
 
-        String jdbcUrl = "db.url";
-        String username = "db.username";
-        String password = "db.password";
-
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+        try (Connection connection = ConnectionPool.getConnection()) {
             LOGGER.info("Connected to the database!");
             IEmployeeDao employeeDao = new EmployeeDaoJDBC();
             EmployeeService employeeService = new EmployeeService(employeeDao);
@@ -60,9 +55,8 @@ public class Main {
             int employeeIdToDelete = 4;
             employeeService.deleteEmployee(employeeIdToDelete);
 
-            // Initialize the AnimalDao
+
             IAnimalDao animalDao = new AnimalDaoJDBC();
-            // Initialize the BreedingService with the AnimalDao
             BreedingService breedingService = new BreedingService(animalDao);
 
             Animal parent1 = new Animal(1, 1, "Cow", "Belgian", 3, "Male");
